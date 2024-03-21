@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h2>Update CSS Variables with <span>JS</span></h2>
+
+<label for="spacing" class="spacing">Spacing:</label>
+<input name="spacing" type="range" min="10" max="200" value="10">
+
+<label for="blur">Blur:</label>
+<input name="blur" type="range" min="0" max="25" value="10">
+
+<label for="baseColor">Base Color:</label>
+<input name="baseColor" type="color" value="#018DED" class="baseColor">
+
+<div>
+<img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+</div>
+</body>
+
+<style>
+html {
+    background: blueviolet;
+    background-size: cover;
+    font-size: 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    min-height: 100vh;
+    font-size: 2rem;
+    align-items: center;
+    color: white;
+}
+
+img {
+    border: 2rem solid #018DED;
+    margin: 5rem;
+}
+
+label {
+    margin: 4rem;
+}
+
+h2 {
+    margin-bottom: 10rem;
+}
+
+span {
+    color: #018DED;
+}
+</style>
+
+<script>
+const img = document.querySelector("img");
+const span = document.querySelector("span");
+
+function changeColor(e) {
+    img.style.borderColor = e.target.value;
+    span.style.color = e.target.value;
+}
+
+function blur(e) {
+    img.style.filter = `blur(${e.target.value}px)`;
+}
+
+const baseColorInp = document.querySelector('input[name="baseColor"]');
+baseColorInp.addEventListener("input",changeColor);
+
+const blurInp = document.querySelector('input[name="blur"]');
+blurInp.addEventListener("input",blur);
+
+</script>
+</html>

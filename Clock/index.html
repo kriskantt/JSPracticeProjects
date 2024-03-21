@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+html {
+    font-size: 10px;
+    background: blue;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    height: 100%;
+}
+.circle {
+    width: 50vw;
+    height: 50vw;
+    border: 0.5vw solid white;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+}
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: 0% 50%;
+}
+
+.hour {
+    background-color: red;
+    width: 30%;
+    height: 1.5%;
+    transform: rotate(10deg);
+}
+
+.min {
+    background-color: white;
+    width: 37%;
+    height: 1.2%;
+    transform: rotate(150deg);
+}
+
+.sec {
+    background-color: yellow;
+    width: 40%;
+    height: 0.9%;
+    transform: rotate(180deg);
+}
+
+</style>
+</head>
+<body>
+
+<div class="circle">
+    <div class="hand hour">
+    </div>
+
+    <div class="hand min">
+    </div>
+
+    <div class="hand sec">
+    </div>
+
+</div>
+<script>
+function findPosition() {
+    const d = new Date();
+    let s = d.getSeconds();
+    let m = d.getMinutes();
+    let h = d.getHours();
+
+    let sec = (s*6 + 270)%360;
+    let min = (d.getMinutes()*6 + 0.1*s + 270)%360;
+    let hour = ((d.getHours()%12)*30 + 0.5*m + 270)%360;
+    // console.log(sec, min, hour);
+
+    let sec_h = document.querySelector('.sec');
+    let min_h = document.querySelector('.min');
+    let hr_h = document.querySelector('.hour');
+
+    sec_h.style.transform = `rotate(${sec}deg)`;
+    min_h.style.transform = `rotate(${min}deg)`;
+    hr_h.style.transform = `rotate(${hour}deg)`;
+}
+
+setInterval(findPosition, 1000);
+
+</script>
+</body>
+</html>
