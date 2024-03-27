@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="inbox">
+        <div class="item">
+          <input type="checkbox">
+          <p>This is an inbox layout.</p>
+        </div>
+        <div class="item">
+          <input type="checkbox">
+          <p>Check one item</p>
+        </div>
+        <div class="item">
+          <input type="checkbox">
+          <p>Hold down your Shift key</p>
+        </div>
+        <div class="item">
+          <input type="checkbox">
+          <p>Check a lower item</p>
+        </div>
+        <div class="item">
+          <input type="checkbox">
+          <p>Everything in between should also be set to checked</p>
+        </div>
+        <div class="item">
+          <input type="checkbox">
+          <p>Try to do it without any libraries</p>
+        </div>
+        <div class="item">
+          <input type="checkbox">
+          <p>Just regular JavaScript</p>
+        </div>
+        <div class="item">
+          <input type="checkbox">
+          <p>Good Luck!</p>
+        </div>
+        <div class="item">
+          <input type="checkbox">
+          <p>Don't forget to tweet your result!</p>
+        </div>
+      </div>
+
+      <style>
+        html {
+            background: orange;
+            background-size: cover;
+            font-size: 10px;
+            overflow: hidden;
+        }
+
+        body {
+            min-height: 100vh;
+            /* border: 10px solid red; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        .inbox {
+            border: 1px solid black;
+            background-color: wheat;
+            padding: 2rem;
+            padding: 8px;
+            box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+        }
+        .item {
+            display: flex;
+            border: 1px solid black;
+            transition: 
+            text-decoration 2s,
+            background-color 0.2s;
+        }
+
+        /* .item > * {
+            border: 1px solid black;
+        } */
+
+        input {
+            margin: 10px;
+        }
+
+        .item.selected {
+            background-color: whitesmoke;
+            text-decoration: line-through;
+        }
+
+        p {
+            margin: 0;
+            padding: 5px;
+            border-left: 1px solid black;
+        }
+      </style>
+
+      <script>
+        const items = Array.from(document.querySelectorAll('.item'));
+        const innerText = items.map(item => (item.innerText));
+        let index = null;
+
+        function toggle(e) {
+            let checkbox = this.querySelector("input[type='checkbox']");
+
+            if(e.shiftKey) {
+                let ind = innerText.findIndex(item => (this.innerText===item));
+
+                if(index == null) {
+                    // console.log("kkd")
+                    index = ind;
+                    checkbox.checked = true;
+                    this.classList.add('selected');
+                }
+                else {
+                    for(let i=0; i<items.length;i++) {
+                        if(i >=ind && i<=index) {
+                            items[i].classList.add('selected');
+                            items[i].querySelector("input[type='checkbox']").checked = true;
+                            console.log("kkc");
+                        }
+                        else if(i<=ind && i>=index) {
+                            items[i].classList.add('selected');
+                            items[i].querySelector("input[type='checkbox']").checked = true;
+                            console.log("kkc");
+                        }
+                    }
+                    index = null;
+                }
+            }
+            else {
+                if(this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                    checkbox.checked = false;
+                }
+                else {
+                    this.classList.add('selected');
+                    checkbox.checked = true;
+                }
+            }
+        }
+        items.forEach(item => item.addEventListener('click', toggle));
+      </script>
+</body>
+</html>
